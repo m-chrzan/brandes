@@ -13,6 +13,8 @@ set(CMAKE_CXX_FLAGS "-std=c++14")
 set(CMAKE_CXX_FLAGS_DEBUG "-Wall -g")
 set(CMAKE_CXX_FLAGS_RELASE "-O3")
 
-set(SOURCE_FILES src/brandes.cc)
+set(SOURCE_FILES src/brandes.cc
+                 src/parse.h
+                 src/graph.h)
 
 add_executable(brandes ${SOURCE_FILES})
