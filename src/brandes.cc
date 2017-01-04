@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 
     Parser parser(input_file);
 
-    Graph graph = parser.get_graph();
+    const Graph &graph = parser.get_graph();
 
     return 0;
 }
