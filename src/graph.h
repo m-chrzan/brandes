@@ -6,31 +6,30 @@
 
 class Graph {
 public:
-    Graph() : graph_() {}
+    Graph() : vertices_(), graph_() {}
 
     void add_vertex(int vertex) {
-        graph_[vertex] = std::vector<int>();
+        if (vertices_.find(vertex) == vertices_.end()) {
+            vertices_.insert(vertex);
+            graph_[vertex] = std::vector<int>();
+        }
     }
 
     void add_edge(int from, int to) {
+        add_vertex(from);
+        add_vertex(to);
         graph_[from].push_back(to);
     }
 
-    std::set<int> get_vertices() {
-        std::set<int> vertices;
-
-        for (auto vertex : graph_) {
-            vertices.insert(vertex.first);
-        }
-
-        return vertices;
+    const std::set<int> & get_vertices() const {
+        return vertices_;
     }
 
-
-    std::vector<int> const& get_neighbors(int vertex) {
-        return graph_[vertex];
+    const std::vector<int> & get_neighbors(int vertex) const {
+        return graph_.find(vertex)->second;
     }
 private:
+    std::set<int> vertices_;
     std::map<int, std::vector<int>> graph_;
 };
 
