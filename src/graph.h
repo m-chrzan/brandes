@@ -16,6 +16,17 @@ public:
         graph_[from].push_back(to);
     }
 
+    std::set<int> get_vertices() {
+        std::set<int> vertices;
+
+        for (auto vertex : graph_) {
+            vertices.insert(vertex.first);
+        }
+
+        return vertices;
+    }
+
+
     std::vector<int> const& get_neighbors(int vertex) {
         return graph_[vertex];
     }
