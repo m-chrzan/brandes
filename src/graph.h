@@ -19,6 +19,7 @@ public:
         add_vertex(from);
         add_vertex(to);
         graph_[from].push_back(to);
+        has_out_edges_.insert(from);
     }
 
     const std::set<int> & get_vertices() const {
@@ -28,9 +29,14 @@ public:
     const std::vector<int> & get_neighbors(int vertex) const {
         return graph_.find(vertex)->second;
     }
+
+    bool has_out_edges(int vertex) const {
+        return has_out_edges_.count(vertex) > 0;
+    }
 private:
     std::set<int> vertices_;
     std::map<int, std::vector<int>> graph_;
+    std::set<int> has_out_edges_;
 };
 
 #endif
