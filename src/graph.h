@@ -29,16 +29,16 @@ public:
         std::sort(orderable_vertices_.begin(), orderable_vertices_.end());
     }
 
-    const std::vector<int> & get_vertices() const {
+    const std::vector<int>& get_vertices() const {
         return orderable_vertices_;
     }
 
-    const std::vector<int> & get_neighbors(int vertex) const {
+    const std::vector<int>& get_neighbors(int vertex) const {
         return graph_.find(vertex)->second;
     }
 
     bool has_out_edges(int vertex) const {
-        return has_out_edges_.count(vertex) > 0;
+        return has_out_edges_.find(vertex) == has_out_edges_.end();
     }
 
 private:

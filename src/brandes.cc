@@ -1,13 +1,13 @@
-#include <algorithm>
 #include <fstream>
 #include <iostream>
-#include <thread>
-#include <queue>
 #include <mutex>
+#include <queue>
+#include <string>
+#include <thread>
 
-#include "parse.h"
-#include "graph.h"
 #include "dependency_calculator.h"
+#include "graph.h"
+#include "parse.h"
 
 int threads;
 std::string input_file;
@@ -16,9 +16,10 @@ std::string output_file;
 Graph graph;
 std::unordered_map<int, double> betweenness;
 std::queue<int> vertices_to_process;
+
+std::vector<std::thread> threads_list;
 std::mutex queue_mutex;
 std::mutex betweenness_mutex;
-std::vector<std::thread> threads_list;
 
 void parse_args(int argc, char *argv[]) {
     if (argc < 4) {
@@ -50,13 +51,12 @@ int next_vertex() {
     if (vertices_to_process.empty()) {
         return -1;
     }
-    int vertex;
-    vertex = vertices_to_process.front();
+    int vertex = vertices_to_process.front();
     vertices_to_process.pop();
     return vertex;
 }
 
-void update_betweenness(int vertex, DependencyCalculator & dc) {
+void update_betweenness(int vertex, DependencyCalculator& dc) {
     std::lock_guard<std::mutex> lock(betweenness_mutex);
     for (int v : graph.get_vertices()) {
         if (v != vertex ) {

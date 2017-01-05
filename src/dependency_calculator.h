@@ -1,16 +1,16 @@
 #ifndef DEPENDENCY_CALCULATOR_H
 #define DEPENDENCY_CALCULATOR_H
 
-#include <stack>
 #include <queue>
-#include <vector>
+#include <stack>
 #include <unordered_map>
+#include <vector>
 
 #include "graph.h"
 
 class DependencyCalculator {
 public:
-    DependencyCalculator(const Graph &graph, int vertex) : graph_(graph),
+    DependencyCalculator(const Graph& graph, int vertex) : graph_(graph),
             vertex_(vertex) {
         init_();
         find_shortest_paths_();
@@ -21,7 +21,7 @@ public:
         return dependency_.find(vertex)->second;
     }
 private:
-    const Graph &graph_; // (V, E)
+    const Graph& graph_; // (V, E)
     int vertex_; // s
     std::stack<int> stack_; // S
     std::unordered_map<int, std::vector<int>> shortest_path_predecessors_; // P
@@ -67,6 +67,7 @@ private:
         while (!stack_.empty()) {
             int vertex = stack_.top();
             stack_.pop();
+
             for (int predecessor : shortest_path_predecessors_[vertex]) {
                 double shortest_path_ratio =
                     (double) shortest_paths_[predecessor] /

@@ -2,9 +2,9 @@
 #define PARSE_H
 
 #include <fstream>
-#include <set>
 #include <sstream>
 #include <string>
+
 #include "graph.h"
 
 class Parser {
@@ -17,7 +17,7 @@ public:
         graph_.sort_vertices();
     }
 
-    const Graph & get_graph() {
+    const Graph& get_graph() {
         return graph_;
     }
 private:
@@ -25,9 +25,11 @@ private:
     std::ifstream input_file_;
 
     void parse_edge_(std::string edge) {
-        int from, to;
         std::stringstream sstream(edge);
+
+        int from, to;
         sstream >> from >> to;
+
         graph_.add_edge(from, to);
     }
 };
