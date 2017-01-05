@@ -3,15 +3,16 @@
 
 #include <fstream>
 #include <set>
+#include <sstream>
+#include <string>
 #include "graph.h"
 
 class Parser {
 public:
     Parser(std::string filename) : graph_(), input_file_(filename) {
-        parse_number_edges_();
-
-        for (int i = 0; i < number_edges_; i++) {
-            parse_edge_();
+        std::string edge;
+        while (std::getline(input_file_, edge)) {
+            parse_edge_(edge);
         }
     }
 
@@ -21,17 +22,11 @@ public:
 private:
     Graph graph_;
     std::ifstream input_file_;
-    int number_edges_;
 
-    void parse_number_edges_() {
-        input_file_ >> number_edges_;
-    }
-
-    void parse_edge_() {
+    void parse_edge_(std::string edge) {
         int from, to;
-
-        input_file_ >> from >> to;
-
+        std::stringstream sstream(edge);
+        sstream >> from >> to;
         graph_.add_edge(from, to);
     }
 };
