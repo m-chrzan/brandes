@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 project(brandes CXX)
 
+find_package ( Threads REQUIRED )
+
 option(DEBUG OFF)
 
 if (DEBUG)
@@ -18,3 +20,4 @@ set(SOURCE_FILES src/brandes.cc
                  src/graph.h)
 
 add_executable(brandes ${SOURCE_FILES})
+target_link_libraries(brandes ${CMAKE_THREAD_LIBS_INIT} )
