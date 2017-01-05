@@ -1,7 +1,8 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-#include <map>
+#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 class Graph {
@@ -22,7 +23,7 @@ public:
         has_out_edges_.insert(from);
     }
 
-    const std::set<int> & get_vertices() const {
+    const std::unordered_set<int> & get_vertices() const {
         return vertices_;
     }
 
@@ -34,9 +35,9 @@ public:
         return has_out_edges_.count(vertex) > 0;
     }
 private:
-    std::set<int> vertices_;
-    std::map<int, std::vector<int>> graph_;
-    std::set<int> has_out_edges_;
+    std::unordered_set<int> vertices_;
+    std::unordered_map<int, std::vector<int>> graph_;
+    std::unordered_set<int> has_out_edges_;
 };
 
 #endif

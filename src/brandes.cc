@@ -14,7 +14,7 @@ std::string input_file;
 std::string output_file;
 
 Graph graph;
-std::map<int, double> betweenness;
+std::unordered_map<int, double> betweenness;
 std::queue<int> vertices_to_process;
 std::mutex queue_mutex;
 std::mutex betweenness_mutex;

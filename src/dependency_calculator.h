@@ -4,7 +4,7 @@
 #include <stack>
 #include <queue>
 #include <vector>
-#include <map>
+#include <unordered_map>
 
 #include "graph.h"
 
@@ -24,11 +24,11 @@ private:
     const Graph &graph_; // (V, E)
     int vertex_; // s
     std::stack<int> stack_; // S
-    std::map<int, std::vector<int>> shortest_path_predecessors_; // P
-    std::map<int, int> shortest_paths_; // sigma
-    std::map<int, int> distance_; // d
+    std::unordered_map<int, std::vector<int>> shortest_path_predecessors_; // P
+    std::unordered_map<int, int> shortest_paths_; // sigma
+    std::unordered_map<int, int> distance_; // d
     std::queue<int> queue_; // Q
-    std::map<int, double> dependency_; // delta
+    std::unordered_map<int, double> dependency_; // delta
 
     void init_() {
         for (int vertex : graph_.get_vertices()) {
