@@ -13,6 +13,7 @@ public:
     void add_vertex(int vertex) {
         if (vertices_.find(vertex) == vertices_.end()) {
             vertices_.insert(vertex);
+            orderable_vertices_.push_back(vertex);
             graph_[vertex] = std::vector<int>();
         }
     }
@@ -24,8 +25,12 @@ public:
         has_out_edges_.insert(from);
     }
 
-    const std::set<int> & get_vertices() const {
-        return vertices_;
+    void sort_vertices() {
+        std::sort(orderable_vertices_.begin(), orderable_vertices_.end());
+    }
+
+    const std::vector<int> & get_vertices() const {
+        return orderable_vertices_;
     }
 
     const std::vector<int> & get_neighbors(int vertex) const {
@@ -37,7 +42,8 @@ public:
     }
 
 private:
-    std::set<int> vertices_;
+    std::unordered_set<int> vertices_;
+    std::vector<int> orderable_vertices_;
     std::unordered_map<int, std::vector<int>> graph_;
     std::unordered_set<int> has_out_edges_;
 };

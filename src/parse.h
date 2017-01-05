@@ -14,6 +14,7 @@ public:
         while (std::getline(input_file_, edge)) {
             parse_edge_(edge);
         }
+        graph_.sort_vertices();
     }
 
     const Graph & get_graph() {
