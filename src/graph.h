@@ -38,7 +38,7 @@ public:
     }
 
     bool has_out_edges(int vertex) const {
-        return has_out_edges_.find(vertex) == has_out_edges_.end();
+        return has_out_edges_.find(vertex) != has_out_edges_.end();
     }
 
 private:
