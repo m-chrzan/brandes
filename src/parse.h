@@ -10,10 +10,8 @@
 class Parser {
 public:
     Parser(std::string filename) : graph_(), input_file_(filename) {
-        std::string edge;
         read_file_();
         add_vertices_();
-        graph_.done_with_vertices();
         add_edges_();
     }
 
@@ -46,6 +44,8 @@ private:
             graph_.add_vertex(edge.first);
             graph_.add_vertex(edge.second);
         }
+
+        graph_.done_with_vertices();
     }
 
     void add_edges_() {

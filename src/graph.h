@@ -14,6 +14,7 @@ public:
         if (vertices_.find(vertex) == vertices_.end()) {
             vertices_.insert(vertex);
             orderable_vertices_.push_back(vertex);
+
             graph_.push_back(std::vector<int>());
             has_out_edges_.push_back(false);
             number_vertices_++;

@@ -3,7 +3,6 @@
 
 #include <queue>
 #include <stack>
-#include <unordered_map>
 #include <vector>
 
 #include "graph.h"
@@ -23,6 +22,7 @@ public:
 private:
     const Graph& graph_; // (V, E)
     int vertex_; // s
+
     std::stack<int> stack_; // S
     std::vector<std::vector<int>> shortest_path_predecessors_; // P
     std::vector<int> shortest_paths_; // sigma

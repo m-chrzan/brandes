@@ -48,16 +48,20 @@ void init() {
 
 int next_vertex() {
     std::lock_guard<std::mutex> lock(queue_mutex);
+
     if (vertices_to_process.empty()) {
         return -1;
     }
+
     int vertex = vertices_to_process.front();
     vertices_to_process.pop();
+
     return vertex;
 }
 
 void update_betweenness(int vertex, DependencyCalculator& dc) {
     std::lock_guard<std::mutex> lock(betweenness_mutex);
+
     for (int v = 0; v < graph.get_number_vertices(); v++) {
         if (v != vertex ) {
             betweenness[v] += dc.get_dependency(v);
@@ -90,7 +94,8 @@ void print_betweenness() {
 
     for (int vertex = 0; vertex < graph.get_number_vertices(); vertex++) {
         if (graph.has_out_edges(vertex)) {
-            fout << graph.get_real_vertex(vertex) << " " << betweenness[vertex] << std::endl;
+            fout << graph.get_real_vertex(vertex) << " "
+                 << betweenness[vertex] << std::endl;
         }
     }
 }
