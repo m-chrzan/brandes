@@ -14,7 +14,7 @@ std::string input_file;
 std::string output_file;
 
 Graph graph;
-std::unordered_map<int, double> betweenness;
+std::vector<double> betweenness;
 std::queue<int> vertices_to_process;
 
 std::vector<std::thread> threads_list;
@@ -40,8 +40,8 @@ void parse_input() {
 }
 
 void init() {
-    for (int vertex : graph.get_vertices()) {
-        betweenness[vertex] = 0;
+    for (int vertex = 0; vertex < graph.get_number_vertices(); vertex++) {
+        betweenness.push_back(0);
         vertices_to_process.push(vertex);
     }
 }
@@ -58,7 +58,7 @@ int next_vertex() {
 
 void update_betweenness(int vertex, DependencyCalculator& dc) {
     std::lock_guard<std::mutex> lock(betweenness_mutex);
-    for (int v : graph.get_vertices()) {
+    for (int v = 0; v < graph.get_number_vertices(); v++) {
         if (v != vertex ) {
             betweenness[v] += dc.get_dependency(v);
         }
@@ -88,9 +88,9 @@ void join_threads() {
 void print_betweenness() {
     std::ofstream fout(output_file);
 
-    for (int vertex : graph.get_vertices()) {
+    for (int vertex = 0; vertex < graph.get_number_vertices(); vertex++) {
         if (graph.has_out_edges(vertex)) {
-            fout << vertex << " " << betweenness[vertex] << std::endl;
+            fout << graph.get_real_vertex(vertex) << " " << betweenness[vertex] << std::endl;
         }
     }
 }

@@ -18,24 +18,24 @@ public:
     }
 
     double get_dependency(int vertex) const {
-        return dependency_.find(vertex)->second;
+        return dependency_[vertex];
     }
 private:
     const Graph& graph_; // (V, E)
     int vertex_; // s
     std::stack<int> stack_; // S
-    std::unordered_map<int, std::vector<int>> shortest_path_predecessors_; // P
-    std::unordered_map<int, int> shortest_paths_; // sigma
-    std::unordered_map<int, int> distance_; // d
+    std::vector<std::vector<int>> shortest_path_predecessors_; // P
+    std::vector<int> shortest_paths_; // sigma
+    std::vector<int> distance_; // d
     std::queue<int> queue_; // Q
-    std::unordered_map<int, double> dependency_; // delta
+    std::vector<double> dependency_; // delta
 
     void init_() {
-        for (int vertex : graph_.get_vertices()) {
-            shortest_path_predecessors_[vertex] = std::vector<int>();
-            shortest_paths_[vertex] = 0;
-            distance_[vertex] = -1;
-            dependency_[vertex] = 0;
+        for (int vertex = 0; vertex < graph_.get_number_vertices(); vertex++) {
+            shortest_path_predecessors_.emplace_back();
+            shortest_paths_.push_back(0);
+            distance_.push_back(-1);
+            dependency_.push_back(0);
         }
 
         shortest_paths_[vertex_] = 1;

@@ -11,10 +11,10 @@ class Parser {
 public:
     Parser(std::string filename) : graph_(), input_file_(filename) {
         std::string edge;
-        while (std::getline(input_file_, edge)) {
-            parse_edge_(edge);
-        }
-        graph_.sort_vertices();
+        read_file_();
+        add_vertices_();
+        graph_.done_with_vertices();
+        add_edges_();
     }
 
     const Graph& get_graph() {
@@ -23,6 +23,14 @@ public:
 private:
     Graph graph_;
     std::ifstream input_file_;
+    std::vector<std::pair<int, int>> edges_;
+
+    void read_file_() {
+        std::string edge;
+        while (std::getline(input_file_, edge)) {
+            parse_edge_(edge);
+        }
+    }
 
     void parse_edge_(std::string edge) {
         std::stringstream sstream(edge);
@@ -30,7 +38,20 @@ private:
         int from, to;
         sstream >> from >> to;
 
-        graph_.add_edge(from, to);
+        edges_.push_back(std::pair<int, int>(from, to));
+    }
+
+    void add_vertices_() {
+        for (auto edge : edges_) {
+            graph_.add_vertex(edge.first);
+            graph_.add_vertex(edge.second);
+        }
+    }
+
+    void add_edges_() {
+        for (auto edge : edges_) {
+            graph_.add_edge(edge.first, edge.second);
+        }
     }
 };
 
