@@ -1,4 +1,8 @@
-# Brandes's Algorithm
+# Brandes' Algorithm
+
+A parallel implementation of Brandes' algorithm for calculating [betweenness
+centrality](https://en.wikipedia.org/wiki/Betweenness_centrality) in unweighted
+graphs.
 
 ## Building
 
@@ -35,3 +39,13 @@ should contain:
     0 0
     2 6
     3 4
+
+## Links
+
+* [*A Faster Algorithm for Betweenness Centrality*
+](https://kops.uni-konstanz.de/bitstream/handle/123456789/5739/algorithm.pdf?sequence=1)
+(U. Brandes)
+
+* [*Parallel Algorithms for Evaluating Centrality Indices in Real-World Networks*
+](https://smartech.gatech.edu/bitstream/handle/1853/14428/GT-CSE-06-13.pdf)
+(D. A. Bader, K. Madduri)
